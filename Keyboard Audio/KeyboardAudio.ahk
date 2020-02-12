@@ -21,6 +21,7 @@ Loop, Files, %A_ScriptDir%\*.mp3, F
 ; Function for playing a specific audio file
 PlaySpecific(key)
 {
+    SoundSet, 100
     path := A_ScriptDir "\" key ".mp3"
     SoundPlay, %path%
 }
@@ -28,6 +29,7 @@ PlaySpecific(key)
 ; Function for playing a random audio file based on .mp3 files in script dir
 PlayRandom()
 {
+    SoundSet, 100
     len := fileList.Length()
     min := fileList.MinIndex()
     random, rand2, %min%, %len%

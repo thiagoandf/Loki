@@ -6,6 +6,9 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 SetBatchLines -1 ;For Speed
 
+Menu, Tray, Tip, Windos Inverse Policy Runner	;on hover of the tray icon, it shows this to trick the user into thinking it's a Windows thing
+Menu, Tray, Icon , Shell32.dll, 21, 1	;location of the the tray icon's icon
+
 ;Reverses the ClipBoard
 reversePercent = 12
 

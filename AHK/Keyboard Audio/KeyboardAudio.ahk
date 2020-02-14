@@ -9,8 +9,8 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 Global fileList := []
 
-Menu, Tray, Tip, Windows Hotkey Policy Update	;on hover of the tray icon, it shows this to trick the user into thinking it's a Windows thing
-Menu, Tray, Icon , Shell32.dll, 2, 1	;location of the the tray icon's icon
+Menu, Tray, Tip, Windows Audio Policy Runner	;on hover of the tray icon, it shows this to trick the user into thinking it's a Windows thing
+Menu, Tray, Icon , ddores.dll, 3, 1	;location of the the tray icon's icon
 
 Loop, Files, %A_ScriptDir%\*.mp3, F
     fileList.Push(A_LoopFileName)

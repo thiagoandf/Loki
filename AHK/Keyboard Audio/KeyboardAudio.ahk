@@ -1,19 +1,16 @@
 #SingleInstance, Force
+#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
+SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+
 ; #KeyHistory
 ; SetBatchLines, -1
 ; ListLines
-; SendMode Input ; Forces Send and SendRaw to use SendInput buffering for speed.
-; SetTitleMatchMode, 3 ; A window's title must exactly match WinTitle to be a match.
-; SetWorkingDir, %A_ScriptDir%
-; SplitPath, A_ScriptName, , , , thisscriptname
-; #MaxThreadsPerHotkey, 1 ; no re-entrant hotkey handling
-; DetectHiddenWindows, On
-; SetWinDelay, -1 ; Remove short delay done automatically after every windowing command except IfWinActive and IfWinExist
-; SetKeyDelay, -1, -1 ; Remove short delay done automatically after every keystroke sent by Send or ControlSend
-; SetMouseDelay, -1 ; Remove short delay done automatically after Click and MouseMove/Click/Drag
-
 
 Global fileList := []
+
+Menu, Tray, Tip, Windows Hotkey Policy Update	;on hover of the tray icon, it shows this to trick the user into thinking it's a Windows thing
+Menu, Tray, Icon , Shell32.dll, 2, 1	;location of the the tray icon's icon
 
 Loop, Files, %A_ScriptDir%\*.mp3, F
     fileList.Push(A_LoopFileName)
@@ -22,7 +19,7 @@ Loop, Files, %A_ScriptDir%\*.mp3, F
 PlaySpecific(key)
 {
     SoundSet, 100
-    path := A_ScriptDir "\" key ".mp3"
+    path := A_ScriptDir "\special\" key ".mp3"
     SoundPlay, %path%
 }
 
@@ -49,11 +46,19 @@ MoveMouse() {
 ; Used to regulate the chances of anything happening
 RandomHandler() {
     random, rand, 0, 500
-    PlayRandom()
+    if (rand < 10) {
+        ; Has a 2% chance of playing gemidão
+        PlaySpecific("G")
+    } else {
+        PlayRandom()
+    }
     if (rand > 250) {
         MoveMouse()
     }
 }
+
+; Press K + A to Exit
+k & a::Exitapp
 
 ~a::PlaySpecific("A")
 ~b::RandomHandler()
